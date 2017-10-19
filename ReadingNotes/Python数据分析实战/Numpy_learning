@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Aug 18 15:11:18 2017
+Numpy learning
+@author: River
+"""
+
+import numpy as np
+a=np.array([1,2,3])
+type(a)
+a
+a.dtype
+a.ndim
+a.size
+a.shape
+
+b=np.array([[1.3,2.4],[3.4,2.4]])
+b.dtype
+b.ndim
+b.size
+b.shape
+b.itemsize
+b.data
+
+#%%创建数组
+c=np.array([[1,2,3],[5,6,7]])
+c
+g=np.array([['a','b'],['c','d']])
+g
+g.dtype.name
+
+#%%定义dtype
+f=np.array([[1,2,3],[2,3,4],[4,5,6]],dtype=complex)
+f
+#%%
+np.zeros((3,3))
+np.ones((3,3))
+np.arange(4,10)
+np.arange(0,12,3)
+np.arange(0,6,.6)
+
+np.arange(0,10).reshape(2,5)
+np.linspace(0,10,4).reshape(2,2)
+np.random.random(3)
+np.random.random((3,3))
+
+
+#%%基本操作
+a=np.arange(4)
+a
+a+4
+a*2
+b=np.arange(4,8)
+b
+a+b
+a*b
+np.sin(b)
+np.sqrt(b)
+
+A=np.arange(0,9).reshape(3,3)
+B=np.ones((3,3))
+A+B
+A*B#对应位相乘
+np.dot(A,B)#矩阵乘法
+

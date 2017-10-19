@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Aug 18 14:47:54 2017
+
+@author: River
+"""
+
+import os
+os.chdir("D:\DataAnalysis\python\Python数据分析实战")
+os.getcwd()
+
+
+#%%包管理
+
+#conda install <packagename>
+#pip install <<packagename>>
+#pip search <<packagename>>
+#pip show <<packagename>>
+#pip unistall <<packagename>>
+
+#%%用于函数式编程开发的函数
+
+#map
+items=[1,2,3,4,5]
+def inc(x):
+    return x+1
+list(map(inc,items))
+
+#%%lambda
+list(map(lambda x: x+1,items))
+
+#%%filter
+list(filter(lambda x: x<4,items))#仅返回判断为true的
+
+#reduce
+from functools import reduce
+reduce((lambda x,y: x+y),items)

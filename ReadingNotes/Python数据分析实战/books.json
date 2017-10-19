@@ -1,0 +1,10 @@
+[{"writer":"Mark Ross",
+"nationality":"USA",
+"books":[{"title":"XML cookbook","price":23.56},
+		{"title":"Python Fundamentals","price":30.24},
+		{"title":"The Numpy library","price":24.14}]},
+{"writer":"Barbara Bracket",
+"nationality":"UK",
+"books":[{"title":"Java Enterprise","price":23.56},
+		{"title":"HTML5","price":30.24},
+		{"title":"Python for Dummies","price":24.14}]}]
