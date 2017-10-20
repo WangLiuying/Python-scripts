@@ -169,3 +169,190 @@ y_test
 linreg.coef_
 linreg.intercept_
 linreg.score(x_test,y_test)#预测集R**2
+
+
+#%%SVM
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import svm
+
+x=np.array([[1,3],[1,2],[1,1.5],[1.5,2],[2,3],[2.5,1.5],[2,1],[3,1],[3,2],[3.5,1],[3.5,3]])
+y=np.array([0]*6+[1]*5)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+           
+#%%fit
+svc=svm.SVC(kernel='linear')#默认C=1
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[0:4:200j,0:4:200j]
+Z=svc.decision_function(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors=['grey','k','grey'],linestyles=['--','-','--'],levels=[-1,0,1])
+plt.contourf(X,Y,Z>0,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+#%%调节C
+svc=svm.SVC(kernel='linear',C=0.1)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[0:4:200j,0:4:200j]
+Z=svc.decision_function(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors=['grey','k','grey'],linestyles=['--','-','--'],levels=[-1,0,1])
+plt.contourf(X,Y,Z>0,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+#%%非线性SVC:多项式核
+
+svc=svm.SVC(kernel='poly',C=1,degree=3)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[0:4:200j,0:4:200j]
+Z=svc.decision_function(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors=['grey','k','grey'],linestyles=['--','-','--'],levels=[-1,0,1])
+plt.contourf(X,Y,Z>0,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+
+#%%非线性SVC:径向基核
+
+svc=svm.SVC(kernel='rbf',C=1,gamma=3)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[0:4:200j,0:4:200j]
+Z=svc.decision_function(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors=['grey','k','grey'],linestyles=['--','-','--'],levels=[-1,0,1])
+plt.contourf(X,Y,Z>0,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+#%%实际数据应用SVM
+
+#线性核
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import svm
+from sklearn import datasets
+iris=datasets.load_iris()
+x=iris.data[:,:2]
+y=iris.target
+plt.scatter(x[:,0],x[:,1],c=y)
+
+svc=svm.SVC(kernel='linear',C=1)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[4:8:200j,1.5:5:200j]
+Z=svc.predict(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors='k')
+plt.contourf(X,Y,Z,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+#%%多项式核
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import svm
+from sklearn import datasets
+iris=datasets.load_iris()
+x=iris.data[:,:2]
+y=iris.target
+plt.scatter(x[:,0],x[:,1],c=y)
+
+svc=svm.SVC(kernel='poly',C=1,degree=3)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[4:8:200j,1.5:5:200j]
+Z=svc.predict(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors='k')
+plt.contourf(X,Y,Z,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+#%%径向基核函数
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import svm
+from sklearn import datasets
+iris=datasets.load_iris()
+x=iris.data[:,:2]
+y=iris.target
+plt.scatter(x[:,0],x[:,1],c=y)
+
+svc=svm.SVC(kernel='rbf',C=1,gamma=3)
+svc.fit(x,y)
+#可视化
+X,Y=np.mgrid[4:8:200j,1.5:5:200j]
+Z=svc.predict(np.c_[X.ravel(),Y.ravel()])
+Z=Z.reshape(X.shape)
+plt.contour(X,Y,Z,colors='k')
+plt.contourf(X,Y,Z,alpha=0.4)
+plt.scatter(x[:,0],x[:,1],c=y,s=50,alpha=0.9)
+plt.scatter(svc.support_vectors_[:,0],svc.support_vectors_[:,1],s=120,
+            edgecolors='k',facecolors='none')
+#预测
+print(svc.predict([[1.5,2.5]]))
+print(svc.predict([[2.5,1]]))
+svc.support_vectors_
+
+
+#%%支持向量回归
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import svm
+from sklearn import datasets
+
+diabetes=datasets.load_diabetes()
+x_train=diabetes.data[:-20]
+y_train=diabetes.target[:-20]
+x_test=diabetes.data[-20:]
+y_test=diabetes.target[-20:]
+
+svr=svm.SVR(kernel='linear',C=1000)
+svr.fit(x_train,y_train)
+svr.coef_
+diabetes.feature_names
+svr.support_
+
+svr=svm.SVR(kernel='poly',degree=3,C=1000)
+svr.fit(x_train,y_train)
+svr.support_
