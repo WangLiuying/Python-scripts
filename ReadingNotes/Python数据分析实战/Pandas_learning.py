@@ -42,8 +42,8 @@ serd=pd.Series([1,0,2,1,2,3],index=['white','white','blue','green','green','yell
 serd
 serd.unique()
 serd.value_counts()
-serd.isin([0,3])
-serd[serd.isin([0,3])]
+serd.isin([0,3])#判断属于【0，3】的项
+serd[serd.isin([0,3])]#取出0和3
 
 #NaN
 s2=pd.Series([5,-3,np.NaN,14])#嵌入NaN
@@ -98,7 +98,7 @@ frame['object'][3]#object列的第4个元素，注意要先选择列再选择行
 frame.index.name='id';frame.columns.name='item'
 frame
 
-frame['new']=12
+frame['new']=12 #boardcast
 frame
 frame['new']=[3.0,1.3,2.2,0.8,1.1]
 frame
@@ -115,7 +115,7 @@ frame[frame.isin([1.0,'pen'])]
 del frame['new']
 frame
 
-#利用嵌套字典生成DataFrame对象
+#利用嵌套字典生成DataFrame对象 #先列后行
 nestdict={'red':{2012:22,2013:33},
           'white':{2011:13,2012:22,2013:16},
             'blue':{2011:17,2012:27,2013:18}}
@@ -228,7 +228,7 @@ frame=pd.DataFrame(np.arange(16).reshape((4,4)),
 frame
 frame.sort_index()
 frame.sort_index(axis=1)
-frame.sort_values =(['pen','pencil'])
+frame.sort_values = (['pen','pencil'],ascending = False)
 frame
 
 

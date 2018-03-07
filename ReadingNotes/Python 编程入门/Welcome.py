@@ -7,8 +7,8 @@ Created on Sun Aug 13 00:38:36 2017
 print("Welcome to Python")
 
 #%%
-name=input("What is your name?").strip()
-print("Hello "+name.capitalize()+"!")
+name=input("What is your name?").strip()#strip去掉空格
+print("Hello "+name.capitalize()+"!")#capitalize首字大写
 
 #%%print
 print("jack","ate","no","fat")
@@ -40,7 +40,7 @@ def say_hello():
     print("hello " + name + "!")
     
 def change_name(newname):
-    global name
+    global name #指明为全局变量
     name=newname
     
 #test

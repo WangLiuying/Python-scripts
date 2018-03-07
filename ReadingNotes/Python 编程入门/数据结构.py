@@ -45,7 +45,7 @@ numbers*2
 #列表的自引用
 snake=[1,2,3]
 snake[1]=snake
-snake
+snake#等等这有什么用啊
 
 #%%列表函数
 #s.append;s.count;s.extend;s.index;s.insert;s.pop;s.remove;s.reverse;s.sort
@@ -74,7 +74,7 @@ lst
 
 
 lst=[6,4,5,3,2,3,5]
-lst.sort()
+lst.sort()#in place
 lst
 
 pts=[(1,2),(2,2),(1,1),(2,1)]

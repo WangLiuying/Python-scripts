@@ -121,8 +121,8 @@ for item in a:
     
 A=np.arange(10,19).reshape(3,3)
 A    
-#for row in A：
- #   print(row)????why
+for row in A:
+    print(row)
 
 for item in A.flat:
     print(item)    
@@ -169,7 +169,8 @@ b=np.array([3,4,5])
 c=np.array([6,7,8])
 np.column_stack((a,b,c))
 np.row_stack((a,b,c))
-
+#note here
+np.vstack((a,b,c))#与row_stack一样
 #%%数组切分
 A=np.arange(16).reshape(4,4)
 A
@@ -209,7 +210,7 @@ A.dot(B.transpose())
 
 #%%广播机制
 #规则一：为却是的维度补上个1
-#规则二：嘉定却是元素都用已有值进行填充
+#规则二：假定缺失元素都用已有值进行填充
 
 A=np.arange(16).reshape((4,4))
 b=np.arange(4)
@@ -228,6 +229,8 @@ structured['f1']
 
 structured=np.array([(1,'First',.5,1+2j),(2,'Second',1.29999,2-2j)],
                     dtype=[('id','i2'),('position','a6'),('value','f4'),('complex','c8')])
+#structured = np.array([(1,'first',.5,1+2j),(2,'second',1.99,2-2j)]) 如果未指定数据格式，那么全部转为文本
+
 structured.dtype.names
 structured.dtype.names=('id','order','value','complex')
 structured

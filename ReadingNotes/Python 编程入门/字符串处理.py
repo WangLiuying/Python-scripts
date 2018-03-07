@@ -23,6 +23,7 @@ food="apple pie"
 food[0:5]
 #提取第0：n，则需写[0:n+1]
 
+#提取拓展名
 def get_ext(fname):
     """Return the extension of file"""
     dot=fname.rfind(".")
@@ -34,20 +35,20 @@ get_ext("hello.txt")
 
 
 #%%标准字符串函数
-dir("")
+dir("")#查看字符串类型的属性和方法
 
 s="cheese"
-s.index("eee")
-s.rfind("eee")
+s.index("ee")
+s.rfind("ee")
 s.rfind("s")
 
 
 s.capitalize()
 s#不会改变原始的字符串
-s=s.capitalize()
+s=s.capitalize()#只有第一个字母会被大写
 s
-s.swapcase()
-s.title()
+s.swapcase()#大小写逆反
+s.title()#每个单词的首字母大写
 
 s.center(10,"*")
 s.ljust(10,"*")
@@ -68,10 +69,10 @@ name.strip()
 title="--Happy Days!--"
 
 url="www.google.com"
-url.partition(".")
-url.rpartition(".")
+url.partition(".")#找到第一个‘.’，分割
+url.rpartition(".")#找到最后一个'.'，分割
 
-url.split(".")
+url.split(".")#所有的‘.’,分割
 story="A long time ago, a princess ate an apple."
 story.split()
 
