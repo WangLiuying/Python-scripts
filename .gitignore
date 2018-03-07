@@ -1,0 +1,5 @@
+
+*.pyc
+*.ipynb
+*.gz
+input_data.py
