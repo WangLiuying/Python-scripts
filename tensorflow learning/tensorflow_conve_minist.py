@@ -7,11 +7,11 @@ Created on Thu Mar  8 19:44:41 2018
 import tensorflow as tf
 #%%
 def weight_var(shape):
-    weight = tf.truncated_normal(shape, stddev = 1.0, dtype = tf.float32)
+    weight = tf.truncated_normal(shape, stddev = 0.1, dtype = tf.float32)
     return tf.Variable(weight)
 
 def bias_var(shape):
-    bias = tf.constant(0,shape = shape, dtype = tf.float32)
+    bias = tf.constant(0.01,shape = shape, dtype = tf.float32)
     return tf.Variable(bias)
 
 #%%
@@ -73,7 +73,7 @@ yhat = tf.nn.softmax(z_fc4)
 #%%训练
 
 cross_entropy = -tf.reduce_sum(y*tf.log(yhat))
-optimizer = tf.train.AdamOptimizer(0.0001)
+optimizer = tf.train.AdamOptimizer(1e-4)
 train_step = optimizer.minimize(cross_entropy)
 correct_predict = tf.equal(tf.argmax(y,1), tf.argmax(yhat,1))
 accuracy = tf.reduce_mean(tf.cast(correct_predict, tf.float32))
@@ -83,13 +83,15 @@ initial = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(initial)
 #%%
-for itertime in range(10000):
+optimizer = tf.train.AdamOptimizer(1e-5)
+for itertime in range(3000):
     batch = mnist.train.next_batch(64)
     if itertime%100==0:
         training_accuracy = sess.run(accuracy, 
                                      feed_dict={x:batch[0], y:batch[1],keepprob:1.0})
-        print('The training at step %d accuracy is %g' % (itertime,
-                                                          training_accuracy))
+        loss = sess.run(cross_entropy,feed_dict={x:mnist.test.images, y:mnist.test.labels,keepprob:1.0})
+        print('The training at step %d accuracy is %g, loss is %g' % (itertime,
+                                                          training_accuracy,loss))
     sess.run(train_step, feed_dict={x:batch[0], y:batch[1],keepprob:0.5})
 print('The test accuracy is %g' %
       sess.run(accuracy, feed_dict={x:mnist.test.images, y:mnist.test.labels,keepprob:1.0}))
