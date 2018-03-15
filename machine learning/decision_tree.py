@@ -177,11 +177,25 @@ class C45Tree:
         for child in list(node.children.values()):
             node.subTreeEntropy += self.subTreeEnt(alpha,child)
         return node.subTreeEntropy
-# 实在不会写了    
-#    def prune(self, alpha = 0.1, node = None):
-#        if node==None:
-#            parentNode = set([node.parent for node in self.leaves])
-#        for cutnode in parentNode
+
+    def prune(self, alpha = 0.1, node = None):
+        if node==None:
+            parentNode = set([node.parent for node in self.leaves])
+            cost = self.subTreeEnt(alpha, self.root)
+            costt = cost
+        for cutnode in parentNode:
+            costT = costt + cutnode.entropy*cutnode.dataNum/self.root.dataNum +alpha
+            for child in list(cutnode.children.values()):
+                costT -= (child.entropy*child.dataNum/self.root.dataNum + alpha)
+            if costT<costt:
+                cutnode.children = 'Leaf'
+                self.leaves.remove(child)
+                self.leaves.append(cutnode)
+                costt = costT
+        if costT<cost:
+            self.prune(alpha)
+        else:
+            return None
             
         
         
@@ -189,6 +203,9 @@ class C45Tree:
 testTree=C45Tree(1e-5)
 testTree.fit(X,Y)        
 testTree.predict(newX)
+testTree.leaves
+testTree.prune(0.3)
+testTree.leaves
 #%%test draft
 
 import sys
