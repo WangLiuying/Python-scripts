@@ -43,3 +43,4 @@ tensorflow_learning/mnist.py
 *.data-00000-of-00001
 *.index
 tensorflow_learning/my_net/checkpoint
+tensorflow_learning/tensorflow_conve_unfinished.py
