@@ -3,3 +3,22 @@
 *.ipynb
 *.gz
 input_data.py
+tensorflow learning/fully_connected_feed.py
+tensorflow learning/mnist.py
+*.csv
+*.pkl
+HRmatch/词典/.RData
+HRmatch/.Rhistory
+HRmatch/5_5任务分配.py
+HRmatch/5_5任务分配.py
+*.txt
+*.png
+Recommendation/download/README
+*.tar
+*.model
+HRmatch/词典/.Rhistory
+HRmatch/词典/词典.rar
+Recommendation/download/rmse.pl
+Recommendation/notebook.tex
+Recommendation/remark_matrix.npz
+*.npz
