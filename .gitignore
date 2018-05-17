@@ -22,3 +22,5 @@ Recommendation/download/rmse.pl
 Recommendation/notebook.tex
 Recommendation/remark_matrix.npz
 *.npz
+tensorflow_learning/__pycache__/cifar10_train.py
+*.meta
