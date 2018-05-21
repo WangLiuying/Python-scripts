@@ -44,3 +44,5 @@ tensorflow_learning/mnist.py
 *.index
 tensorflow_learning/my_net/checkpoint
 tensorflow_learning/tensorflow_conve_unfinished.py
+*.zip
+*.cfg
