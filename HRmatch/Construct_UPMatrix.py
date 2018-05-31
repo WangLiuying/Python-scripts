@@ -2,9 +2,10 @@
 """
 Created on Sun May 20 15:38:49 2018
 构造人才-岗位矩阵
+切分数据集
 @author: Liuying Wang
 """
-from scipy import sparse
+from scipy import sparseb
 import pandas as pd
 import numpy as np
 #%%
@@ -56,3 +57,39 @@ UPmat,UID,PID = formUPmat(records.iloc[:,1:3])
 sparse.save_npz(file = 'User-Position.npz',matrix=UPmat)
 UID.to_pickle('UserID.pkl')
 PID.to_pickle('PositionID.pkl')
+
+
+#%%Split test and train
+#切分10分之一的记录作为测试集
+#总计共有1474340条记录因此抽取 147434条作为测试集
+N = 1474340
+np.random.seed(123)
+testIndex = np.random.choice(range(int(N)),size=int(N/10),replace=False)
+testIndex = (UPmat.nonzero()[0][testIndex],UPmat.nonzero()[1][testIndex])
+trainset = UPmat.copy().todok()
+trainset[testIndex[0],testIndex[1]]=0
+sparse.save_npz(file='training.npz',matrix=trainset.tocoo())
+pd.to_pickle(testIndex,path='testIndex.pkl')
+
+#%%
+UPmat = sparse.load_npz('User-Position.npz')
+UPmat=UPmat.todok()
+PosHist = UPmat.sum(0)
+UserHist = UPmat.sum(1)
+PosHist = np.squeeze(np.asarray(PosHist))
+UserHist = np.squeeze(np.asarray(UserHist))
+#%%
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+plt.rcParams#默认参数
+plt.rcParams['axes.prop_cycle']
+
+plt.rcParams['font.sans-serif'] = ['SimHei'] # 指定默认字体
+plt.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
+
+_,ax = plt.subplots()
+plt.hist(UserHist,bins=100)
+ax.set_xlim(0,150)
+plt.title('单人投递简历数直方图')
+plt.show()
+UPmat
